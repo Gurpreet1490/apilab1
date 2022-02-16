@@ -32,6 +32,17 @@ public class CoffeeControllerTests {
 
         this.mockMvcController.perform(MockMvcRequestBuilders.get("/coffee"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(expectedValue));;
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(expectedValue));
     }
+
+    @Test
+    public void testCoffeeWithParams() throws Exception{
+        String expectedValue = "cappuccino";
+
+        this.mockMvcController
+                .perform(MockMvcRequestBuilders.get("/coffee?name="+expectedValue))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(expectedValue));
+    }
+
 }
